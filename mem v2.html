@@ -1,0 +1,512 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Memespedia -- Laugh. Learn. Remember.</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Memespedia: a playful homepage with a search bar and meme categories." />
+</head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const lifeTile = document.querySelector('.tile[title="Life"]');
+
+  const memeSection = document.createElement("section");
+  memeSection.classList.add("meme-section");
+  memeSection.style.display = "none";
+  memeSection.innerHTML = `
+    <h2>🌱 Life Memes</h2>
+    <div class="meme-grid">
+      <div class="meme-card">
+        <h3>What is Time?</h3>
+        <img id="timeMeme" src="https://i.imgur.com/9VZ6j9K.jpeg" alt="What is Time meme">
+        <div class="controls">
+          <input type="file" accept="image/*" id="timeFile">
+          <input type="text" placeholder="Paste online image URL..." id="timeUrl">
+          <button id="timeUpdate">Update</button>
+        </div>
+      </div>
+
+      <div class="meme-card">
+        <h3>What is Family?</h3>
+        <img id="familyMeme" src="https://i.imgur.com/BnLDP1W.jpeg" alt="What is Family meme">
+        <div class="controls">
+          <input type="file" accept="image/*" id="familyFile">
+          <input type="text" placeholder="Paste online image URL..." id="familyUrl">
+          <button id="familyUpdate">Update</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.querySelector("main").appendChild(memeSection);
+
+  // Toggle Life memes visibility
+  lifeTile.addEventListener("click", (e) => {
+    e.preventDefault();
+    memeSection.style.display = 
+      memeSection.style.display === "none" ? "block" : "none";
+    memeSection.scrollIntoView({ behavior: "smooth" });
+  });
+
+  // ---- Functionality for "What is Time?" ----
+  const timeImg = document.getElementById("timeMeme");
+  const timeFile = document.getElementById("timeFile");
+  const timeUrl = document.getElementById("timeUrl");
+  const timeUpdate = document.getElementById("timeUpdate");
+
+  timeFile.addEventListener("change", () => {
+    const file = timeFile.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => timeImg.src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+
+  timeUpdate.addEventListener("click", () => {
+    if (timeUrl.value.trim()) {
+      timeImg.src = timeUrl.value.trim();
+      timeUrl.value = "";
+    }
+  });
+
+  // ---- Functionality for "What is Family?" ----
+  const familyImg = document.getElementById("familyMeme");
+  const familyFile = document.getElementById("familyFile");
+  const familyUrl = document.getElementById("familyUrl");
+  const familyUpdate = document.getElementById("familyUpdate");
+
+  familyFile.addEventListener("change", () => {
+    const file = familyFile.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => familyImg.src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+
+  familyUpdate.addEventListener("click", () => {
+    if (familyUrl.value.trim()) {
+      familyImg.src = familyUrl.value.trim();
+      familyUrl.value = "";
+    }
+  });
+});
+</script>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="logo">🧠</span>
+      <span class="brand-text">Memespedia</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Laugh. Learn. Remember.</h1>
+      <p class="tagline">Wikipedia energy, meme delivery.</p>
+
+      <form class="search" role="search" aria-label="Search memes">
+        <input type="search" placeholder="Search memes or topics..." aria-label="Search input" />
+        <button type="button" aria-label="Search">🔍</button>
+      </form>
+    </section>
+
+    <!-- Categories (symbolic icon grid like the screenshot vibe) -->
+    <section class="categories">
+      <h2 class="section-title">Browse by genre</h2>
+
+      <div class="grid">
+        <a href="#" class="tile" title="Human Psychology">
+          <div class="icon">🧠</div>
+          <div class="label">Human Psychology</div>
+        </a>
+
+        <a href="#" class="tile" title="Technology">
+          <div class="icon">💻</div>
+          <div class="label">Technology</div>
+        </a>
+
+        <a href="#" class="tile" title="Science">
+          <div class="icon">🔬</div>
+          <div class="label">Science</div>
+        </a>
+
+        <a href="#" class="tile" title="Life">
+          <div class="icon">🌱</div>
+          <div class="label">Life</div>
+        </a>
+
+        <a href="#" class="tile" title="Movies">
+          <div class="icon">🎬</div>
+          <div class="label">Movies</div>
+        </a>
+
+        <a href="#" class="tile" title="College">
+          <div class="icon">🎓</div>
+          <div class="label">College</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Slide-down description -->
+    <section class="about">
+      <details class="disclosure">
+        <summary>
+          <span>About Memespedia</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </summary>
+        <div class="content">
+          <p>
+            Memespedia explains real concepts using humor, memes, and short explanations.
+            Keep it fun, keep it accurate, and make it memorable. This is a simple prototype
+            homepage--search bar up top, clean icon categories below. More soon. 🚀
+          </p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>© Memespedia -- a tiny prototype for vibes and layout.</small>
+  </footer>
+</body>
+</html><style>:root{
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --brand: #7c3aed; /* purple */
+  --shadow: 0 8px 24px rgba(17,24,39,0.08);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; }
+.logo { font-size: 22px; }
+.brand-text {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+/* Layout container */
+.container { max-width: 980px; margin: 0 auto; padding: 16px; }
+
+/* Hero + search */
+.hero { text-align: center; padding: 14px 0 4px; }
+.hero h1 { font-size: clamp(22px, 4vw, 36px); margin: 4px 0; }
+.tagline { color: var(--muted); margin: 0 0 12px; }
+
+.search {
+  display: flex; gap: 8px; justify-content: center;
+  max-width: 680px; margin: 0 auto;
+}
+.search input[type="search"] {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+  min-width: 0;
+}
+.search button {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+}
+
+/* Categories */
+.categories { margin-top: 18px; }
+.section-title {
+  font-weight: 800;
+  font-size: 16px;
+  margin: 8px 0 10px;
+  color: var(--text);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(6, 1fr); }
+}
+
+.tile {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 10px;
+  box-shadow: var(--shadow);
+  transition: transform .08s ease, box-shadow .2s ease;
+}
+.tile:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(17,24,39,0.12); }
+
+.icon {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(124,58,237,0.08);
+  border: 1px solid rgba(124,58,237,0.25);
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+.label {
+  font-weight: 700; font-size: 14px;
+}
+
+/* Slide-down about (pure CSS) */
+.about { max-width: 720px; margin: 16px auto 28px; }
+.disclosure {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.disclosure summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  font-weight: 700;
+}
+.disclosure summary::-webkit-details-marker { display: none; }
+.disclosure .chev { transition: transform .15s ease; }
+.disclosure[open] .chev { transform: rotate(180deg); }
+
+.disclosure .content {
+  padding: 0 14px 12px;
+  color: var(--muted);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 20px 10px 28px;
+  font-size: 13px;
+}<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const lifeTile = document.querySelector('.tile[title="Life"]');
+
+  const memeSection = document.createElement("section");
+  memeSection.classList.add("meme-section");
+  memeSection.style.display = "none";
+  memeSection.innerHTML = `
+    <h2>🌱 Life Memes</h2>
+    <div class="meme-grid">
+      <div class="meme-card">
+        <h3>What is Time?</h3>
+        <img id="timeMeme" src="https://i.imgur.com/9VZ6j9K.jpeg" alt="What is Time meme">
+        <div class="controls">
+          <input type="file" accept="image/*" id="timeFile">
+          <input type="text" placeholder="Paste online image URL..." id="timeUrl">
+          <button id="timeUpdate">Update</button>
+        </div>
+      </div>
+
+      <div class="meme-card">
+        <h3>What is Family?</h3>
+        <img id="familyMeme" src="https://i.imgur.com/BnLDP1W.jpeg" alt="What is Family meme">
+        <div class="controls">
+          <input type="file" accept="image/*" id="familyFile">
+          <input type="text" placeholder="Paste online image URL..." id="familyUrl">
+          <button id="familyUpdate">Update</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.querySelector("main").appendChild(memeSection);
+
+  // Toggle Life memes visibility
+  lifeTile.addEventListener("click", (e) => {
+    e.preventDefault();
+    memeSection.style.display = 
+      memeSection.style.display === "none" ? "block" : "none";
+    memeSection.scrollIntoView({ behavior: "smooth" });
+  });
+
+  // ---- Functionality for "What is Time?" ----
+  const timeImg = document.getElementById("timeMeme");
+  const timeFile = document.getElementById("timeFile");
+  const timeUrl = document.getElementById("timeUrl");
+  const timeUpdate = document.getElementById("timeUpdate");
+
+  timeFile.addEventListener("change", () => {
+    const file = timeFile.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => timeImg.src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+
+  timeUpdate.addEventListener("click", () => {
+    if (timeUrl.value.trim()) {
+      timeImg.src = timeUrl.value.trim();
+      timeUrl.value = "";
+    }
+  });
+
+  // ---- Functionality for "What is Family?" ----
+  const familyImg = document.getElementById("familyMeme");
+  const familyFile = document.getElementById("familyFile");
+  const familyUrl = document.getElementById("familyUrl");
+  const familyUpdate = document.getElementById("familyUpdate");
+
+  familyFile.addEventListener("change", () => {
+    const file = familyFile.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => familyImg.src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+
+  familyUpdate.addEventListener("click", () => {
+    if (familyUrl.value.trim()) {
+      familyImg.src = familyUrl.value.trim();
+      familyUrl.value = "";
+    }
+  });
+});
+</script>
+
+.controls {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.controls input[type="file"],
+.controls input[type="text"] {
+  font-size: 13px;
+}
+
+.controls button {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--brand);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+.controls button:hover {
+  background: #5b21b6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.controls {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.controls input[type="file"],
+.controls input[type="text"] {
+  font-size: 13px;
+}
+
+.controls button {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--brand);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+.controls button:hover {
+  background: #5b21b6;
+}
+
+
+
+
+
+
+
+
+
+/* Make memes responsive and limit their height */
+.meme-card img {
+  width: 100%;
+  height: auto;
+  max-height: 280px; /* Adjust height as needed */
+  object-fit: contain;
+  border-radius: 12px;
+  margin-top: 8px;
+  display: block;
+}
+
+/* Keep meme section tidy */
+.meme-section {
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* Center meme grid properly */
+.meme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+/* Ensure other tiles (categories) aren't affected */
+.categories {
+  position: relative;
+  z-index: 1;
+}</style>
