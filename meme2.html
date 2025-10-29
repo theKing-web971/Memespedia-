@@ -1,0 +1,205 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memespedia - Where Learning Goes Viral 🤳</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Using more Gen Z-friendly fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🔥 MEMESPEDIA</h1>
+            <p class="tagline">Where learning goes viral 🤳 | No cap, just facts + memes</p>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search knowledge... (try 'anxiety' or 'crypto')">
+                <button id="searchButton">🔎 Slay Search</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Admin Panel - Only visible to you as admin -->
+        <div id="adminPanel" class="admin-panel">
+            <h3>👑 ADMIN MODE: Upload Your Images</h3>
+            <p>Replace any topic's image by entering its ID and uploading a new image</p>
+            <div class="admin-form">
+                <input type="number" id="adminTopicId" placeholder="Topic ID">
+                <input type="text" id="adminImageUrl" placeholder="Image URL (or upload)">
+                <button id="adminUpdateBtn">✨ Update Image</button>
+            </div>
+            <div class="admin-upload">
+                <label for="imageUpload" class="upload-btn">📁 Upload Image</label>
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                <div id="uploadPreview"></div>
+            </div>
+        </div>
+
+        <section id="homePage" class="page active">
+            <div class="trending-banner">
+                <span>🔥 TRENDING NOW</span>
+            </div>
+            <div class="meme-grid" id="memeGrid"></div>
+            
+            <!-- Add meme button on homepage too -->
+            <div class="floating-add-btn" id="floatingAddBtn">➕</div>
+        </section>
+
+        <section id="topicPage" class="page">
+            <div class="back-button" id="backButton">← Bounce Back</div>
+            <div class="topic-content">
+                <img id="topicImage" src="" alt="Meme image" class="topic-image">
+                <div class="topic-header">
+                    <h2 id="topicTitle"></h2>
+                    <div class="share-icons">
+                        <button class="social-btn tiktok">🎵</button>
+                        <button class="social-btn instagram">📸</button>
+                        <button class="social-btn twitter">🐦</button>
+                    </div>
+                </div>
+                <p id="topicHook" class="topic-hook"></p>
+                <div class="topic-explainer">
+                    <p id="topicText"></p>
+                </div>
+                <div id="deepDiveContainer" class="deep-dive-container">
+                    <button id="toggleDeepDive" class="toggle-button">🧠 Deep Dive (no boring stuff, promise)</button>
+                    <div id="deepDiveContent" class="deep-dive-content hidden">
+                        <p id="deepDiveText"></p>
+                        <div class="vibe-check">
+                            <span>Vibe Check: </span>
+                            <button class="vibe-btn" data-vibe="relatable">Relatable 😅</button>
+                            <button class="vibe-btn" data-vibe="unhinged">Unhinged 🤪</button>
+                            <button class="vibe-btn" data-vibe="valid">Valid ✅</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button id="shareButton" class="share-button">🔗 Copy Link (for your finsta)</button>
+                    <button id="saveButton" class="save-button">💾 Save for Later</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="submitPage" class="page">
+            <div class="back-button" id="backToHomeButton">← Bounce Back</div>
+            <div class="submit-form-container">
+                <h2>🚀 Drop Your Knowledge Bomb</h2>
+                <p>Create a meme that'll make your friends say "OMG THIS IS SO TRUE"</p>
+                <form id="memeSubmitForm">
+                    <div class="form-group">
+                        <label for="memeTitle">Topic Name (keep it spicy 🌶️)</label>
+                        <input type="text" id="memeTitle" required placeholder="e.g., Adulting, Crypto, Anxiety...">
+                    </div>
+                    <div class="form-group">
+                        <label for="memeHook">Viral Hook (make it snappy 💥)</label>
+                        <input type="text" id="memeHook" required placeholder="e.g., When you finally understand taxes (you won't)">
+                    </div>
+                    <div class="form-group">
+                        <label for="memeImage">Image URL (or use our dank meme library)</label>
+                        <input type="url" id="memeImage" required placeholder="https://example.com/your-slay-image.jpg">
+                        <div class="meme-library">
+                            <p>Or pick from our meme templates:</p>
+                            <div class="template-buttons">
+                                <button type="button" class="template-btn" data-template="distracted-boyfriend">👀</button>
+                                <button type="button" class="template-btn" data-template="drake">🙅‍♂️👍</button>
+                                <button type="button" class="template-btn" data-template="woman-yelling">😤</button>
+                                <button type="button" class="template-btn" data-template="change-my-mind">🪑</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="memeExplanation">Explanation (100-200 words, no jargon allowed)</label>
+                        <textarea id="memeExplanation" rows="4" required placeholder="Break it down like you're explaining to your sleep-deprived 3am self..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="memeDeepDive">Deep Dive (optional, for the overachievers)</label>
+                        <textarea id="memeDeepDive" rows="3" placeholder="Extra tea ☕ for those who want to sip deeper..."></textarea>
+                    </div>
+                    <div class="vibe-selector">
+                        <label>Select Vibe:</label>
+                        <div class="vibe-options">
+                            <label><input type="radio" name="vibe" value="relatable" checked> Relatable 😅</label>
+                            <label><input type="radio" name="vibe" value="unhinged"> Unhinged 🤪</label>
+                            <label><input type="radio" name="vibe" value="valid"> Valid ✅</label>
+                            <label><input type="radio" name="vibe" value="sigma"> Sigma 😎</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-button">🚀 POST IT (go viral or cry trying)</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Memespedia -- Making education less cringe since 2024 🙏</p>
+            <div class="footer-links">
+                <a href="#" id="showSubmitPage">➕ Create Meme</a>
+                <a href="#" id="toggleAdmin">👑 Admin Mode</a>
+                <a href="#">💬 Feedback</a>
+            </div>
+            <div class="social-proof">
+                <span>Join 69,420+ learners who stopped being bored 👇</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast notification element -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>// Sample meme data with Gen Z vibes
+// NOTE: As admin, you can replace any image URL with your own uploaded images
+// Just update the "image" property for any topic below
+const memes = [
+    {
+        id: 1,
+        title: "Gravity",
+        hook: "Even Earth can't resist attraction 😏",
+        // ADMIN NOTE: Replace this image URL with your own uploaded image
+        image: "https://images.unsplash.com/photo-1535827842134-313268e89e14?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        explanation: "Gravity is that clingy ex who won't let you go. It's the reason you can't float away when adulting gets too hard. Newton got hit by an apple (rude) and figured out that everything with mass attracts everything else. Einstein later said 'nah, it's spacetime bending' like a TikTok dance challenge.",
+        deepDive: "Gravity's strength depends on mass and distance. That's why you weigh less on Mars - not because you're healthier, but because Mars is lighter than Earth! Time also slows down near massive objects (yes, really). Without gravity, we'd all be floating in space like forgotten Amazon packages. Fun fact: Astronauts grow taller in space because gravity isn't compressing their spine!",
+        vibe: "relatable"
+    },
+    {
+        id: 2,
+        title: "AI",
+        hook: "When your calculator gets a PhD. 🤖",
+        // ADMIN NOTE: Replace this image URL with your own uploaded image
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        explanation: "AI is like that one friend who's weirdly good at everything. It can write essays, create art, and even flirt (badly). Machine Learning means it learns from data - like how you learn from your dating app mistakes. Neural networks? Just fancy math pretending to be a brain. Don't worry, Skynet isn't happening... probably.",
+        deepDive: "There's Narrow AI (good at one thing, like recommending Netflix shows) and General AI (doesn't exist yet, would be like a human). Most AI today is just pattern recognition on steroids. The 'intelligence' part is debatable - it's more like a super advanced autocomplete. Training AI models takes insane amounts of energy - some use as much electricity as small countries. So next time ChatGPT gives you bad advice, blame its carbon footprint!",
+        vibe: "unhinged"
+    },
+    {
+        id: 3,
+        title: "Time",
+        hook: "Everything happens... eventually. ⏳",
+        // ADMIN NOTE: Replace this image URL with your own uploaded image
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        explanation: "Time is that friend who's always late but also somehow runs out too fast. Physics says it's relative - meaning it literally moves slower when you're speeding (Einstein was wildin'). Your brain perceives time differently based on dopamine levels, which is why fun times fly and boring lectures feel eternal. Pro tip: Time doesn't heal all wounds, but it does make them easier to ignore.",
+        deepDive: "According to quantum physics, time might not even be fundamental - it could emerge from something deeper, like how temperature emerges from molecular motion. In space, clocks on GPS satellites run faster than on Earth due to weaker gravity. Your perception of time accelerates as you age because each year becomes a smaller percentage of your life. And yes, procrastinators, there is a mathematical formula for your struggle: Motivation = (Expectancy × Value) ÷ (Impulsiveness × Delay).",
+        vibe: "valid"
+    },
+    {
+        id: 4,
+        title: "Love",
+        hook: "The most advanced human algorithm. ❤️",
+        // ADMIN NOTE: Replace this image URL with your own uploaded image
+        image: "https://images.unsplash.com/photo-1519747255558-9e339acab590?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        explanation: "Love is basically a chemical cocktail party in your brain. Dopamine (the hype friend), oxytocin (the cuddly one), and serotonin (the chiller) all show up. The 'butterflies' feeling? That's literally stress hormones. Long-term love switches from dopamine to oxytocin - from 'I can't stop thinking about you' to 'I can't stop stealing your hoodies'. Romance is biology dressed up as magic.",
+        deepDive: "fMRI scans show love activates the same brain regions as addiction. The initial 'falling in love' phase lasts 18 months to 3 years (coincidence? I think not). Heartbreak literally causes physical pain - your brain processes it like a wound. Arranged marriages have similar success rates to love marriages because attachment grows with time. And cats? They definitely don't love you... or do they? (They do, but on their terms.)",
+        vibe: "sigma"
+    },
+    {
+        id: 5,
+        title: "Procrastination",
+        hook: "Tomorrow's me will handle it (he won't). 😅",
+        // ADMIN NOTE: Replace this image URL with your own uploaded image
+        image: "https://images.unsplash.com/photo-1533750516457-a7f992034fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        explanation: "Procrastination isn't laziness - it's your brain choosing instant dopamine over future rewards. You're not bad at time management, you're bad at emotional regulation. The task feels uncomfortable, so you scroll TikTok instead. Your future self is not a different person - they're you, but more tired and regretful. Break tasks into micro-steps: 'open laptop' is easier than 'write essay'.",
+        deepDive: "Research shows procrastinators have larger amygdalas (fear center) and weaker prefrontal cortex connections (planning center). We delay tasks that trigger negative emotions - boredom, anxiety, insecurity. The '5-minute rule' works because starting is 
